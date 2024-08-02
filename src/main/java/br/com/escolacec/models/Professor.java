@@ -1,6 +1,7 @@
 package br.com.escolacec.models;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Professor {
@@ -24,18 +26,13 @@ public class Professor {
 	@Enumerated(EnumType.STRING)
 	private StatusProfessor statusProfessor;
 	
-	public Professor() {
-		
-	}
+	@OneToMany(mappedBy = "professor")
+	private List<Turma> turmas;
 
 	public Long getId() {
 		return id;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -59,6 +56,15 @@ public class Professor {
 	public void setStatusProfessor(StatusProfessor statusProfessor) {
 		this.statusProfessor = statusProfessor;
 	}
+
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
+	}
+	
 	
 	
 }
