@@ -5,11 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.escolacec.models.Professor;
@@ -17,7 +18,7 @@ import br.com.escolacec.service.ProfessorService;
 
 
 @RestController
-@RequestMapping("/professor")
+@RequestMapping("/api/professor")
 public class ProfessorController {
 	
 	@Autowired
@@ -38,6 +39,15 @@ public class ProfessorController {
 		return professorService.createProfessor(professor);
 	}
 	
+	@PutMapping("/update/{id}")
+	public Professor updateProfessor(@PathVariable Long id, @RequestBody Professor professor) {
+		return professorService.updateProfessor(id, professor);
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public void deleteProfessor(@PathVariable Long id) {
+		professorService.deleteProfessor(id);
+	}
 	
 	
 }
