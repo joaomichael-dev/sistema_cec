@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,16 +16,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.escolacec.models.Professor;
 import br.com.escolacec.service.ProfessorService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 @RestController
-@RequestMapping("/api/professor")
+@RequestMapping(value = "/api/professor", consumes = {"application/json"})
+@Tag(name = "/api/professor")
 public class ProfessorController {
 	
 	@Autowired
 	private ProfessorService professorService;
 	
-	@GetMapping
+	@Operation(summary = "Traz todos os professores cadastrados", method = "GET")
+	@ApiResponses(
+		value = {
+			@ApiResponse(responseCode = "200", description = "Busca da lista de professores feita com sucesso!"),
+			@ApiResponse(responseCode = "400", description = "Parametros inválidos!")
+		}
+	)
+	@GetMapping()
 	public List<Professor> getAllProfessor() {
 		return professorService.getAllProfessores();
 	}
