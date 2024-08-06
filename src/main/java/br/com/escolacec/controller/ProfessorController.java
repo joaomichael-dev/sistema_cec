@@ -48,7 +48,7 @@ public class ProfessorController {
 	}
 	
 	@PostMapping("/new")
-	public Professor create(@RequestBody Professor professor) {
+	public Professor createProfessor(@RequestBody Professor professor) {
 		return professorService.createProfessor(professor);
 	}
 	
